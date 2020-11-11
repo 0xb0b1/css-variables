@@ -1,8 +1,10 @@
-const inputs = document.querySelectorAll('.controls input')
+const inputs = [].slice.call(document.querySelectorAll('input'));
+
+inputs.forEach(input => input.addEventListener('change', handleUpdate));
+inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
 
 function handleUpdate() {
-    console.log(this.value)
-}
+    const suffix = this.dataset.sizing || ''
 
-inputs.forEach(input => input.addEventListener('change', handleUpdate))
-inputs.forEach(input => input.addEventListener('mousemove', handleUpdate))
+    document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+}
